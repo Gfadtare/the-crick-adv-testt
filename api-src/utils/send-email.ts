@@ -7,17 +7,38 @@ import { Resend } from 'resend';
 export type SendResult = { ok: boolean; error?: string };
 
 // Sender address, in order of preference:
-// 1. RESEND_FROM_EMAIL if set explicitly
-// 2. an address on RESEND_EMAIL_DOMAIN (set automatically by the Vercel Resend integration;
-//    this is the domain the connected Resend account is actually allowed to send from)
-// 3. booking@thecricketadvisor.com (only works if that domain is verified in Resend)
+// 1. RESEND_FROM_EMAIL if set explicitly (plain address or "Name <address>")
+// 2. an address built from RESEND_EMAIL_DOMAIN (set automatically by the Vercel Resend integration).
+//    This value may be a bare domain, a full email address, or a URL, so it is cleaned up first.
+// 3. onboarding@resend.dev (Resend's shared test sender; only delivers to the Resend account owner)
+const EMAIL_RE = /^[^\s@<>"']+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
+const clean = (v?: string) => (v || '').trim().replace(/^['"]+|['"]+$/g, '');
+
 export const getFromEmail = (): string => {
-  const explicit = process.env.RESEND_FROM_EMAIL?.trim();
-  if (explicit) return explicit;
-  const domain = process.env.RESEND_EMAIL_DOMAIN?.trim().replace(/^@/, '');
-  if (domain) return `booking@${domain}`;
-  return 'booking@thecricketadvisor.com';
+  const explicit = clean(process.env.RESEND_FROM_EMAIL);
+  if (explicit) {
+    const inner = explicit.match(/<([^>]+)>/)?.[1]?.trim() || explicit;
+    if (EMAIL_RE.test(inner)) return inner;
+    console.error('[Email] RESEND_FROM_EMAIL is not a valid email address, ignoring it:', explicit);
+  }
+
+  let raw = clean(process.env.RESEND_EMAIL_DOMAIN);
+  if (raw) {
+    raw = raw.replace(/^[a-z]+:\/\//i, '').split(/[/?#]/)[0];   // strip https:// and any path
+    const inner = raw.match(/<([^>]+)>/)?.[1]?.trim() || raw;
+    if (inner.includes('@')) {
+      if (EMAIL_RE.test(inner)) return inner;                    // already a full address
+      raw = inner.split('@').pop() || '';
+    }
+    const candidate = `booking@${raw.replace(/^@/, '')}`;
+    if (EMAIL_RE.test(candidate)) return candidate;
+    console.error('[Email] Could not build a sender from RESEND_EMAIL_DOMAIN:', process.env.RESEND_EMAIL_DOMAIN);
+  }
+
+  return 'onboarding@resend.dev';
 };
+
+export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
 
 export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
 
