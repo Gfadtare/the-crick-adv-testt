@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { getFromEmail } from './utils/send-email.js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -18,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const resend = new Resend(apiKey.trim());
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'booking@thecricketadvisor.com';
+  const fromEmail = getFromEmail();
 
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
