@@ -6,8 +6,20 @@ import { Resend } from 'resend';
 
 export type SendResult = { ok: boolean; error?: string };
 
-export const getFromAddress = () =>
-  `The Cricket Advisor <${(process.env.RESEND_FROM_EMAIL || 'booking@thecricketadvisor.com').trim()}>`;
+// Sender address, in order of preference:
+// 1. RESEND_FROM_EMAIL if set explicitly
+// 2. an address on RESEND_EMAIL_DOMAIN (set automatically by the Vercel Resend integration;
+//    this is the domain the connected Resend account is actually allowed to send from)
+// 3. booking@thecricketadvisor.com (only works if that domain is verified in Resend)
+export const getFromEmail = (): string => {
+  const explicit = process.env.RESEND_FROM_EMAIL?.trim();
+  if (explicit) return explicit;
+  const domain = process.env.RESEND_EMAIL_DOMAIN?.trim().replace(/^@/, '');
+  if (domain) return `booking@${domain}`;
+  return 'booking@thecricketadvisor.com';
+};
+
+export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
 
 export const getAdminNotifyEmails = (): string[] =>
   (process.env.ADMIN_NOTIFY_EMAIL || 'thecricketadvisor@gmail.com')
