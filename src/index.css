@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@font-face {
+  font-display: swap;
+  font-family: 'Almaden Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://st1.zoom.us/homepage/20260825-1235/primary/dist/assets/fonts/almaden-sans/AlmadenSans-Regular-WebXL.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Almaden Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://st1.zoom.us/homepage/20260825-1235/primary/dist/assets/fonts/almaden-sans/AlmadenSans-Medium-WebXL.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Almaden Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://st1.zoom.us/homepage/20260825-1235/primary/dist/assets/fonts/almaden-sans/AlmadenSans-SemiBold-WebXL.woff2) format("woff2");
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Almaden Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://st1.zoom.us/homepage/20260825-1235/primary/dist/assets/fonts/almaden-sans/AlmadenSans-Bold-WebXL.woff2) format("woff2");
+}
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sharp: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-arial: 'Inter', Arial, Helvetica, sans-serif;
+  --font-coaches: 'Almaden Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --color-gold-50: #FFFDF5;
+  --color-gold-100: #FFF6D6;
+  --color-gold-200: #FCE6A4;
+  --color-gold-300: #F9D473;
+  --color-gold-400: #F6C142;
+  --color-gold-500: #D4AF37; /* Real Royal Gold */
+  --color-gold-600: #B7942B;
+  --color-gold-700: #997B20;
+  --color-gold-800: #7C6215;
+  --color-gold-900: #5E4A0B;
+  --color-gold-950: #413303;
+
+  --color-navy-50: #f8fafc;
+  --color-navy-100: #f1f5f9;
+  --color-navy-200: #e2e8f0;
+  --color-navy-300: #cbd5e1;
+  --color-navy-400: #94a3b8;
+  --color-navy-500: #64748b;
+  --color-navy-600: #475569;
+  --color-navy-700: #1e293b;
+  --color-navy-800: #0B1A30; /* Zoom Navy Background */
+  --color-navy-900: #090e24; /* Zoom Deep Navy */
+  --color-navy-950: #00031f; /* Zoom Dark Theme background */
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-[#FAFBFD] text-slate-800 antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight font-semibold text-navy-900;
+  }
+}
+
+/* Custom animations and visual utilities */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FFF6D6 0%, #D4AF37 50%, #B7942B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-navy {
+  background: linear-gradient(135deg, #0B5CFF 0%, #0B1A30 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #FFF6D6 0%, #D4AF37 50%, #B7942B 100%);
+}
+
+.bg-navy-gradient {
+  background: linear-gradient(135deg, #0B1A30 0%, #090e24 50%, #00031f 100%);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-panel-dark {
+  background: rgba(11, 26, 48, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.border-gold-glow {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400;
+}
+
+/* Premium fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.text-custom-darkblack-step5 {
+  color: #000000 !important;
+}
+
+.no-blue-hover:hover {
+  background-color: transparent !important;
+}
+
+
