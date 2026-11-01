@@ -1,16 +1,14 @@
 import { Resend } from 'resend';
 
 // Resend's emails.send() does NOT throw when sending fails. It returns { data, error }.
-// The old code never checked `error`, so failed emails (unverified domain, bad API key,
-// wrong "from" address) disappeared silently. This helper checks and logs it.
+// The old code never checked `error`, so failed emails disappeared silently.
 
 export type SendResult = { ok: boolean; error?: string };
 
 // Sender address, in order of preference:
 // 1. RESEND_FROM_EMAIL if set explicitly (plain address or "Name <address>")
-// 2. an address built from RESEND_EMAIL_DOMAIN (set automatically by the Vercel Resend integration).
-//    This value may be a bare domain, a full email address, or a URL, so it is cleaned up first.
-// 3. onboarding@resend.dev (Resend's shared test sender; only delivers to the Resend account owner)
+// 2. an address built from RESEND_EMAIL_DOMAIN (set by the Vercel Resend integration)
+// 3. onboarding@resend.dev (Resend's shared test sender)
 const EMAIL_RE = /^[^\s@<>"']+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
 const clean = (v?: string) => (v || '').trim().replace(/^['"]+|['"]+$/g, '');
 
@@ -24,10 +22,10 @@ export const getFromEmail = (): string => {
 
   let raw = clean(process.env.RESEND_EMAIL_DOMAIN);
   if (raw) {
-    raw = raw.replace(/^[a-z]+:\/\//i, '').split(/[/?#]/)[0];   // strip https:// and any path
+    raw = raw.replace(/^[a-z]+:\/\//i, '').split(/[/?#]/)[0];
     const inner = raw.match(/<([^>]+)>/)?.[1]?.trim() || raw;
     if (inner.includes('@')) {
-      if (EMAIL_RE.test(inner)) return inner;                    // already a full address
+      if (EMAIL_RE.test(inner)) return inner;
       raw = inner.split('@').pop() || '';
     }
     const candidate = `booking@${raw.replace(/^@/, '')}`;
@@ -37,10 +35,6 @@ export const getFromEmail = (): string => {
 
   return 'onboarding@resend.dev';
 };
-
-export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
-
-export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
 
 export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
 
@@ -65,10 +59,10 @@ export const sendEmail = async (opts: { to: string | string[]; subject: string; 
       html: opts.html
     });
     if (result?.error) {
-      console.error('[Email] Resend rejected the email:', opts.subject, JSON.stringify(result.error));
+      console.error('[Email] Resend rejected the email:', opts.subject, 'from:', getFromAddress(), JSON.stringify(result.error));
       return { ok: false, error: result.error.message || 'Email provider rejected the message' };
     }
-    console.log('[Email] Sent:', opts.subject, 'id:', result?.data?.id);
+    console.log('[Email] Sent:', opts.subject, 'from:', getFromAddress(), 'id:', result?.data?.id);
     return { ok: true };
   } catch (err: any) {
     console.error('[Email] Failed to send:', opts.subject, err);
