@@ -21,6 +21,8 @@ export const getFromEmail = (): string => {
 
 export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
 
+export const getFromAddress = () => `The Cricket Advisor <${getFromEmail()}>`;
+
 export const getAdminNotifyEmails = (): string[] =>
   (process.env.ADMIN_NOTIFY_EMAIL || 'thecricketadvisor@gmail.com')
     .split(',')
