@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { getFromEmail } from './send-email.js';
 
 const getResendClient = () => {
   const apiKey = process.env.RESEND_API_KEY;
@@ -18,7 +19,7 @@ export const sendBookingEmail = async (booking: any): Promise<boolean> => {
 
   // Resend requires verified domains to send to any recipient.
   // Defaults to booking@thecricketadvisor.com, but falls back to onboarding@resend.dev if needed for testing.
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'booking@thecricketadvisor.com';
+  const fromEmail = getFromEmail();
 
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
@@ -79,7 +80,7 @@ export const sendAssessmentEmail = async (assessment: any): Promise<boolean> => 
   }
 
   const resend = new Resend(apiKey.trim());
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'booking@thecricketadvisor.com';
+  const fromEmail = getFromEmail();
 
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
@@ -129,7 +130,7 @@ export const sendSkillsAssessmentEmail = async (assessment: any): Promise<boolea
   }
 
   const resend = new Resend(apiKey.trim());
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'booking@thecricketadvisor.com';
+  const fromEmail = getFromEmail();
 
   const htmlContent = `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
