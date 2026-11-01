@@ -1,0 +1,36 @@
+[
+  {
+    "id": "MOCK-ON-001",
+    "firstName": "Harshil",
+    "lastName": "Doshi",
+    "testMode": "Online",
+    "playingRole": "Wicketkeeper Batsman",
+    "subRole": "Wicket Keeper",
+    "age": 24,
+    "nationality": "Indian",
+    "countryOfResidence": "India",
+    "email": "harshil@example.com",
+    "mobileCountryCode": "+91",
+    "mobileNumber": "9876543210",
+    "paymentStatus": "paid",
+    "amountPaid": 4999,
+    "submittedAt": "2026-08-30T10:00:00Z"
+  },
+  {
+    "id": "MOCK-OFF-001",
+    "firstName": "Amit",
+    "lastName": "Sharma",
+    "testMode": "Offline",
+    "playingRole": "All-rounder",
+    "subRole": "Right-arm Fast Medium",
+    "age": 22,
+    "nationality": "Indian",
+    "countryOfResidence": "India",
+    "email": "amit@example.com",
+    "mobileCountryCode": "+91",
+    "mobileNumber": "8765432109",
+    "paymentStatus": "paid",
+    "amountPaid": 8999,
+    "submittedAt": "2026-08-30T11:00:00Z"
+  }
+]

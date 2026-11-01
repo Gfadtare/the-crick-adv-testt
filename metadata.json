@@ -1,0 +1,6 @@
+{
+  "name": "The Cricket Advisor",
+  "description": "Premium global cricket career consulting, player placement, club website development, international tours, and cricket operations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

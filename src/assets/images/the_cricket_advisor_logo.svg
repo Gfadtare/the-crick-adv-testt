@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Gold Metallic Gradients -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF5B7"/>
+      <stop offset="25%" stop-color="#D4AF37"/>
+      <stop offset="50%" stop-color="#FFDF73"/>
+      <stop offset="75%" stop-color="#AA771C"/>
+      <stop offset="100%" stop-color="#8A5A00"/>
+    </linearGradient>
+
+    <linearGradient id="goldDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#996515"/>
+    </linearGradient>
+
+    <radialGradient id="ballGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FF4D4D"/>
+      <stop offset="60%" stop-color="#C1121F"/>
+      <stop offset="100%" stop-color="#660708"/>
+    </radialGradient>
+
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0B132B" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Clean White Circle Base -->
+  <circle cx="250" cy="250" r="238" fill="#FFFFFF" stroke="url(#goldGrad)" stroke-width="12" filter="url(#shadow)"/>
+  
+  <!-- Outer Gold Accent Ring -->
+  <circle cx="250" cy="250" r="222" fill="none" stroke="#0B132B" stroke-width="2" stroke-dasharray="5,4" opacity="0.6"/>
+  <circle cx="250" cy="250" r="192" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+
+  <!-- Crossed Cricket Bats in Background -->
+  <g opacity="0.9" filter="url(#shadow)">
+    <!-- Left Bat -->
+    <g transform="rotate(-35 250 250)">
+      <rect x="243" y="75" width="14" height="105" rx="5" fill="url(#goldGrad)"/>
+      <path d="M239 180 L261 180 L258 355 L242 355 Z" fill="url(#goldDark)"/>
+      <rect x="243" y="75" width="14" height="105" rx="5" fill="#0B132B" opacity="0.15"/>
+    </g>
+    <!-- Right Bat -->
+    <g transform="rotate(35 250 250)">
+      <rect x="243" y="75" width="14" height="105" rx="5" fill="url(#goldGrad)"/>
+      <path d="M239 180 L261 180 L258 355 L242 355 Z" fill="url(#goldDark)"/>
+      <rect x="243" y="75" width="14" height="105" rx="5" fill="#0B132B" opacity="0.15"/>
+    </g>
+  </g>
+
+  <!-- Center Crest Shield (Navy Blue with Gold Rim) -->
+  <path d="M250 140 L330 180 V280 C330 335 250 375 250 375 C250 375 170 335 170 280 V180 Z" fill="#0B132B" stroke="url(#goldGrad)" stroke-width="6" filter="url(#shadow)"/>
+  <path d="M250 148 L322 184 V275 C322 325 250 362 250 362 C250 362 178 325 178 275 V184 Z" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Cricket Ball inside Shield -->
+  <g filter="url(#shadow)">
+    <circle cx="250" cy="240" r="50" fill="url(#ballGrad)" stroke="url(#goldGrad)" stroke-width="3"/>
+    <!-- Ball Seam -->
+    <path d="M215 218 C 240 230, 260 250, 285 262" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="3,3" opacity="0.95"/>
+    <path d="M215 218 C 240 230, 260 250, 285 262" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Golden Stars above Shield -->
+  <g fill="url(#goldGrad)" filter="url(#shadow)">
+    <!-- Center Star -->
+    <polygon points="250,92 254,103 266,103 256,110 260,121 250,114 240,121 244,110 234,103 246,103"/>
+    <!-- Left Star -->
+    <polygon points="215,102 218,111 228,111 220,117 223,126 215,120 207,126 210,117 202,111 212,111" transform="rotate(-15 215 114)"/>
+    <!-- Right Star -->
+    <polygon points="285,102 288,111 298,111 290,117 293,126 285,120 277,126 280,117 272,111 282,111" transform="rotate(15 285 114)"/>
+  </g>
+
+  <!-- Advisor Gold Crown/Emblem Base -->
+  <path d="M225 310 L250 295 L275 310 L265 328 L235 328 Z" fill="url(#goldGrad)"/>
+
+  <!-- Curved Text Top Banner: THE CRICKET -->
+  <path id="textArcTop" d="M 90,250 A 160,160 0 0,1 410,250" fill="none"/>
+  <text font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="28" fill="#0B132B" letter-spacing="5">
+    <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">
+      THE CRICKET
+    </textPath>
+  </text>
+
+  <!-- Curved Text Bottom Banner: ADVISOR -->
+  <path id="textArcBottom" d="M 410,250 A 160,160 0 0,1 90,250" fill="none"/>
+  <text font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="30" fill="#0B132B" letter-spacing="7">
+    <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">
+      ADVISOR
+    </textPath>
+  </text>
+
+  <!-- Left & Right Gold Bullets -->
+  <circle cx="82" cy="250" r="7" fill="url(#goldGrad)" stroke="#0B132B" stroke-width="1.5"/>
+  <circle cx="418" cy="250" r="7" fill="url(#goldGrad)" stroke="#0B132B" stroke-width="1.5"/>
+</svg>

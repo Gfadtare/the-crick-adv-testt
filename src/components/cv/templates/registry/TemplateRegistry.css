@@ -1,0 +1,113 @@
+/* Template-specific Page Dimensions CSS Variables Contract */
+
+.template-executive {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-margin-top: 15mm;
+  --page-margin-bottom: 15mm;
+  --page-margin-left: 15mm;
+  --page-margin-right: 15mm;
+  --section-gap: 6mm;
+}
+
+.template-professional {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-margin-top: 12mm;
+  --page-margin-bottom: 12mm;
+  --page-margin-left: 12mm;
+  --page-margin-right: 12mm;
+  --section-gap: 5mm;
+}
+
+.template-international {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-margin-top: 10mm;
+  --page-margin-bottom: 10mm;
+  --page-margin-left: 10mm;
+  --page-margin-right: 10mm;
+  --section-gap: 4mm;
+}
+
+.template-elite {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-margin-top: 14mm;
+  --page-margin-bottom: 14mm;
+  --page-margin-left: 14mm;
+  --page-margin-right: 14mm;
+  --section-gap: 6mm;
+}
+
+.template-classic {
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-margin-top: 16mm;
+  --page-margin-bottom: 16mm;
+  --page-margin-left: 16mm;
+  --page-margin-right: 16mm;
+  --section-gap: 8mm;
+}
+
+/* Atomic wrapper helpers */
+.cv-atomic-block {
+  margin-bottom: var(--section-gap);
+}
+
+/* Capitalize the first letter of every word on the CV templates */
+.template-executive,
+.template-professional,
+.template-international,
+.template-classic,
+.template-performance,
+.template-prestige {
+  text-transform: capitalize;
+}
+
+/* Exclude links, emails, icons, and elements explicitly marked no-capitalize from capitalization */
+.no-capitalize,
+.no-capitalize *,
+a,
+a *,
+.ico,
+.ico *,
+svg,
+svg *,
+.email-text,
+.email-text * {
+  text-transform: none !important;
+}
+
+/* Capitalize all text in the CV Workspace */
+.cv-workspace-container,
+.cv-workspace-container * {
+  text-transform: capitalize;
+}
+
+/* Exclude inputs/elements that must preserve case */
+.cv-workspace-container input[type="email"],
+.cv-workspace-container input[type="password"],
+.cv-workspace-container input[type="url"],
+.cv-workspace-container .no-capitalize,
+.cv-workspace-container .no-capitalize * {
+  text-transform: none !important;
+}
+
+/* Expand hit target of links for mobile devices when scaled */
+.cv-document-paginated a {
+  position: relative;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+.cv-document-paginated a::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  bottom: -12px;
+  left: -12px;
+  right: -12px;
+  pointer-events: auto !important;
+}
+
+
